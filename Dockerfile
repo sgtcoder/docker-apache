@@ -11,6 +11,7 @@ RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 ## Copy Default Config ##
 COPY ./configs/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY ./configs/healthcheck.conf /etc/apache2/conf-enabled/healthcheck.conf
+COPY ./configs/php.ini /usr/local/etc/php/php.ini
 
 ## User Permissions ##
 RUN usermod -u $PUID www-data && groupmod -g $PGID www-data
