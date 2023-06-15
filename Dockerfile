@@ -14,7 +14,8 @@ COPY ./configs/healthcheck.conf /etc/apache2/conf-enabled/healthcheck.conf
 COPY ./configs/php.ini /usr/local/etc/php/php.ini
 
 ## User Permissions ##
-RUN usermod -u $PUID www-data && groupmod -g $PGID www-data
+RUN mkdir /home/www-data && chown -R www-data:www-data /home/www-data
+RUN usermod -u $PUID -d /home/www-data -s /bin/bash www-data && groupmod -g $PGID www-data
 
 ## Healthcheck ##
 HEALTHCHECK CMD curl --fail http://localhost:5000/healthcheck || exit 1
